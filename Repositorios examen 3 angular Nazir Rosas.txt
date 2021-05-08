@@ -1,0 +1,75 @@
+repositorio examen 3 angular https://github.com/A2116018/ExamenAngular3
+
+repositorio examen 3 api https://github.com/A2116018/Examen3API
+
+Nazir Rosas Examen 3 angular
+
+proveedor detalle component.ts 
+
+import { Component, OnInit, Input } from '@angular/core'
+import { Proveedor } from '../proveedor';
+import { ProveedorService } from '../proveedor.service';
+
+@Component({
+  selector: 'app-proveedor-detalle',
+  templateUrl: './proveedor-detalle.component.html',
+  styleUrls: ['./proveedor-detalle.component.css']
+})
+export class ProveedorDetalleComponent implements OnInit {
+
+  @Input() proveedor?: Proveedor;
+  
+  constructor( private datosProveedor:ProveedorService) { }
+
+  ngOnInit(): void {
+  }
+
+  actualizar ()
+  {
+    console.log(this.proveedor.name);
+    console.log(this.proveedor.id);
+
+    var newProveedor = <Proveedor>{};
+
+    newProveedor.id=this.proveedor.id;
+    newProveedor.name=this.proveedor.name;
+    newProveedor.type="proveedor";
+    newProveedor.saldo=0;
+    newProveedor.estado= "nuevo";
+  }
+
+}
+_________________________________-
+
+proveedor detalle component.html
+<div *ngIf="proveedor">  
+    <h2>Edición de {{proveedor.name | uppercase}}</h2>
+    <div><span>id: </span>{{proveedor.id}}</div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre del Proveedor:</mat-label>
+      <input matInput id="proveedor-name" [(ngModel)]="proveedor.name" placeholder="name">
+    </mat-form-field>
+
+    <div>
+      <label for="proveedor-id">Id Proveedor: </label>
+      <input id="proveedor-id" [(ngModel)]="proveedor.id" placeholder="id">
+    </div>   
+</div>
+
+<section>
+  <div class="example-label">Edicion</div>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Edicion</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+<div>
+ <label for="proveedor-id">Id Proveedor: </label>
+  <input id="proveedor-id" [(ngModel)]="proveedor.id" placeholder="id">
+</div>
+  
+  <div class="example-button-row">
+    <button mat-button>Actualice el proveedor</button>
+
